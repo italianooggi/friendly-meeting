@@ -3,9 +3,9 @@
 # ============================================================
 #  PRIVATE — Never commit candidate personal data
 # ============================================================
-# If you add a real candidate Brain, create a local copy of
-# context/candidate/ and add the path here so it's not tracked.
-# Example: context/candidates/gustavo/
+# Real candidate Brains live in context/candidates/<name>/
+# They are NEVER committed to git. Templates only go to GitHub.
+context/candidates/
 
 # ============================================================
 #  Generated output files (pipeline artifacts)
