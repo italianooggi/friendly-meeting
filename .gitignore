@@ -1,0 +1,37 @@
+# .gitignore for Agente-CV
+
+# ============================================================
+#  PRIVATE — Never commit candidate personal data
+# ============================================================
+# If you add a real candidate Brain, create a local copy of
+# context/candidate/ and add the path here so it's not tracked.
+# Example: context/candidates/gustavo/
+
+# ============================================================
+#  Generated output files (pipeline artifacts)
+# ============================================================
+output/job_analysis.md
+output/match_report.md
+output/cv_draft.md
+output/validation_report.md
+output/gap_analysis.md
+output/quality_report.md
+output/archive/
+
+# ============================================================
+#  OS & IDE
+# ============================================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ============================================================
+#  Runtime & dependencies
+# ============================================================
+node_modules/
+__pycache__/
+*.pyc
+.env
+*.tmp
+*.bak
