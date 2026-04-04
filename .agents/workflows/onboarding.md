@@ -12,6 +12,32 @@ This workflow guides the initial setup of the candidate's persistent context —
 
 ## Steps
 
+### Step 0: Identify the Candidate
+// turbo
+**This step is mandatory.** Before doing anything else, establish who this onboarding is for.
+
+Ask:
+> _"¿Cuál es el nombre del candidato que vamos a registrar?"_
+
+**Resolution logic:**
+
+| Situation | Action |
+|---|---|
+| User provides a name (e.g. "Guadalupe") | Brain will be saved to `context/candidates/guadalupe/` — announce: _"✅ Creando Brain para **Guadalupe**"_ |
+| Candidate already exists | Ask: _"Ya existe un Brain para este candidato. ¿Quieres actualizar los datos existentes o crear uno nuevo?"_ |
+| No name provided | Ask again — onboarding cannot proceed without a candidate name |
+
+> 🔒 **Privacy rule**: Each candidate has their own isolated folder. Data from one candidate never touches another's Brain.
+
+Create the folder if it doesn't exist: `context/candidates/[name]/`
+
+Display this header at the start of every response from here on:
+```
+👤 Candidato: [Name]
+📁 Brain: context/candidates/[name]/
+🎯 Modo: Onboarding
+```
+
 ### Step 1: Choose Onboarding Mode
 The candidate can be onboarded via any combination of:
 - **Mode A**: Structured Interview (RECOMMENDED — deepest extraction)
@@ -37,7 +63,7 @@ The interview covers **4 pillars**:
 
 **User checkpoint**: The interview can be done in multiple sessions. Ask the candidate how much time they have.
 
-### Step 4: Create/Update Profile (`context/candidate/profile.md`)
+### Step 4: Create/Update Profile (`context/candidates/[name]/profile.md`)
 From interview answers (mainly Pillars 2, 3, 4):
 - [ ] Full name, location, contact info
 - [ ] Professional summary (2-3 sentences, adaptable)
@@ -48,7 +74,7 @@ From interview answers (mainly Pillars 2, 3, 4):
 - [ ] Personal preferences for CV generation (what to emphasize or exclude)
 - [ ] Work permit / availability / location preferences
 
-### Step 5: Create/Update Experiences (`context/candidate/experiences.md`)
+### Step 5: Create/Update Experiences (`context/candidates/[name]/experiences.md`)
 From interview answers (mainly Pillars 1 and 2):
 - [ ] **Every** past role listed with: company, location, dates (MM/YYYY), title, type
 - [ ] 3-6 key achievements per role using **PAR/CAR/XYZ** formulas (with **metrics**)
@@ -56,7 +82,7 @@ From interview answers (mainly Pillars 1 and 2):
 - [ ] Mark template placeholders if data is incomplete
 - [ ] Note career gaps with honest framing (from Q52)
 
-### Step 6: Create/Update Skills Inventory (`context/candidate/skills.md`)
+### Step 6: Create/Update Skills Inventory (`context/candidates/[name]/skills.md`)
 From interview answers (mainly Pillar 2, Q20-Q23):
 - [ ] Technical skills grouped by category with proficiency levels
 - [ ] Soft skills with evidence from interview stories
@@ -64,7 +90,7 @@ From interview answers (mainly Pillar 2, Q20-Q23):
 - [ ] Education (degree, institution, year, honors)
 - [ ] Skills currently being learned (from Pillar 3, Q31-Q33)
 
-### Step 7: Create/Update Life Stories (`context/candidate/life_stories.md`)
+### Step 7: Create/Update Life Stories (`context/candidates/[name]/life_stories.md`)
 From interview answers (mainly Pillar 4, Q39-Q50):
 - [ ] At least 3-4 impact stories in STAR format
 - [ ] Each story must include quantified results
@@ -84,15 +110,25 @@ Review all created files against minimum thresholds:
 - [ ] Target role/market preferences are defined
 
 ### Step 9: Save as Baseline
-The candidate's Brain is now ready. All future job applications will read from these files.
+The candidate's Brain is now ready. Confirm to the user:
+
+```
+✅ Brain creado para: [Candidate Name]
+📁 Ubicación: context/candidates/[name]/
+🏆 Calidad estimada: [run candidate-quality for exact score]
+
+Próximo paso: ejecuta /apply con una oferta laboral.
+```
 
 ## Output
-A fully populated `context/candidate/` directory serving as the candidate's persistent knowledge base.
+A fully populated `context/candidates/[name]/` directory — isolated, private, never committed to git.
 
 ## Notes
+- **Step 0 is mandatory** — no files are created until the candidate name is confirmed
 - This workflow should be **re-run** whenever the candidate changes jobs, learns a new skill, or achieves something notable
 - The interview (Step 3) can be done **partially** — start with what's available, enrich later
 - Files are plain Markdown — the candidate can edit them manually at any time
-- Version control (git) will track all changes over time
+- `context/candidates/` is in `.gitignore` — real candidate data is NEVER pushed to GitHub
 - The `candidate-interview` skill has 53 questions organized by pillar — you don't need to ask all of them every time
+- 🔒 Each candidate is fully isolated — running onboarding for Guadalupe will never touch Gustavo's files
 
