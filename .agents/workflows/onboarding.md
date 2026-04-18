@@ -10,6 +10,9 @@ This workflow guides the initial setup of the candidate's persistent context —
 - The repository has been cloned and the directory structure exists
 - The candidate has at least one of: existing CV, LinkedIn profile, or is ready to answer questions
 
+> [!CAUTION]
+> **Security First**: All real candidate data is stored in `context/candidates/` and `output/`. These folders are strictly excluded by the pre-configured `.gitignore`. **NEVER** modify the ignore rules for these paths to avoid accidental data leaks to GitHub.
+
 ## Steps
 
 ### Step 0: Identify the Candidate

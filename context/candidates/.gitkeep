@@ -1,0 +1,2 @@
+# This file ensures that the context/candidates/ directory is tracked by Git while remaining empty.
+# Real candidate data placed here is protected by .gitignore.

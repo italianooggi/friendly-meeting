@@ -181,7 +181,22 @@ After running `/apply`, the `output/` directory contains:
 - `validation_report.md` — ATS score and keyword coverage
 - `gap_analysis.md` — ranking + gap report (if using GAP Analyzer)
 
-All output files are git-ignored by default. Archive any application with `/apply → Step 8`.
+---
+
+## 🔒 Privacy & Security (Local-First)
+
+This system is designed with **Privacy by Design**. Your personal data, work history, and generated CVs never leave your local machine.
+
+- **Local-Only Brain**: All your sensitive data lives in `context/` and `output/`.
+- **Pre-configured `.gitignore`**: The repository comes with a robust `.gitignore` that strictly excludes:
+    - Entire `output/` folder (where tailored CVs are saved).
+    - `context/candidates/` folder (for multi-profile management).
+    - AI Assistant metadata (`.brain`, `.gemini`, `.agent`) to prevent history leakage.
+    - Environment variables (`.env*`) and secrets.
+- **No APIs or Servers**: No external databases or tracking. You are in full control of your data.
+
+> [!TIP]
+> Always verify your `git status` before pushing changes to your fork. The system handles the heavy lifting of keeping your PII out of commits.
 
 ---
 

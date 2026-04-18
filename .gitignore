@@ -1,22 +1,21 @@
 # .gitignore for Agente-CV
 
 # ============================================================
-#  PRIVATE — Never commit candidate personal data
+#  PRIVATE — Candidate Data & AI Metadata
 # ============================================================
-# Real candidate Brains live in context/candidates/<name>/
-# They are NEVER committed to git. Templates only go to GitHub.
+# REAL candidate data (regardless of folder name)
 context/candidates/
+output/
+# Keep directory structure via .gitkeep
+!output/.gitkeep
+!templates/.gitkeep
 
-# ============================================================
-#  Generated output files (pipeline artifacts)
-# ============================================================
-output/job_analysis.md
-output/match_report.md
-output/cv_draft.md
-output/validation_report.md
-output/gap_analysis.md
-output/quality_report.md
-output/archive/
+# AI Assistant Metadata (Antigravity/Engram/Cursor/Windsurf)
+# These folders may contain full conversation history & PII
+.brain/
+.gemini/
+.agent/
+.agents/brain/
 
 # ============================================================
 #  OS & IDE
@@ -25,13 +24,21 @@ output/archive/
 Thumbs.db
 .vscode/
 .idea/
+.project
+.settings/
 
 # ============================================================
-#  Runtime & dependencies
+#  Runtime & Secrets
 # ============================================================
 node_modules/
 __pycache__/
 *.pyc
-.env
+.env*
 *.tmp
 *.bak
+
+# Common secret-holding patterns
+*.pem
+*.key
+secrets.*
+config.local.*
