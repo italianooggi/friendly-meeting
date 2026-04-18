@@ -1,124 +1,342 @@
 ---
-name: resume-tailor
-description: Rewrites and optimizes resume content based on the match report, producing a tailored CV draft optimized for the specific job position.
+name: Resume Tailor
+description: Customize resume for specific job postings while maintaining truthfulness
 ---
 
-# Resume Tailor Skill
+# Resume Tailor
 
-## Purpose
-Take the match report and produce a **complete, tailored CV draft** in Markdown format. The CV must be optimized for the specific job while remaining 100% truthful to the candidate's real experience.
+## When to Use This Skill
 
-## Input
-- `output/match_report.md` — The profile match report (produced by `profile-matcher`)
-- `output/job_analysis.md` — The original job analysis (for keyword bank and market context)
-- `context/candidate/profile.md` — For personal info and summary preferences
-- `context/ats_rules.md` — **MUST READ FIRST** — Contains formatting rules, bullet formulas, and market-specific conventions
+Use this skill when the user wants to:
+- Customize their resume for a specific job posting
+- Adjust their resume to match job requirements
+- Create a targeted version of their resume
+- Mentions: "tailor resume", "customize resume", "target role", "specific job", "match job description"
 
-## Process
+Use AFTER job-description-analyzer to know what to emphasize.
 
-### Step 1: Craft the Professional Summary
-Write a 2-3 sentence professional summary that:
-- Opens with years of experience and primary role identity
-- Highlights the **most relevant achievement** for this specific job
-- Includes 2-3 **ATS keywords** naturally
-- Follows the candidate's tone preferences from `profile.md`
+## Core Capabilities
 
-### Step 2: Select and Rewrite Experience Bullets
-For each selected experience from the match report:
-1. Write **3-6 bullet points** per position (more for the most recent/relevant)
-2. Each bullet **MUST** use one of the three proven formulas from the research:
+- Reorder experience sections by relevance to target role
+- Adjust professional summary for specific position
+- Add missing keywords from job description
+- Modify bullet points to match job requirements
+- Maintain authenticity while optimizing match
+- Create multiple targeted resume versions
 
-**🎯 PAR (Project/Problem – Action – Result):**
-> [Action verb] + [what you did] + [tool/method] + [measurable impact]
-> _"Automatié la conciliación diaria con Python y SQL, reduciendo el tiempo de cierre de 6h a 45min y disminuyendo errores un 30%."_
+## The Tailoring Philosophy
 
-**🎯 CAR (Challenge – Action – Result):**
-> [Challenge context] → [what you did] → [outcome]
-> _"Ante un backlog creciente de incidencias, rediseñé el triage y métricas de SLA; bajamos el tiempo medio de resolución un 25% en 8 semanas."_
+**Key Principle:** You're not lying or fabricating - you're HIGHLIGHTING the most relevant parts of your true experience.
 
-**🎯 XYZ (Google/Federal style):**
-> Logré [X] (medido por [Y]) haciendo [Z]
-> _"Logré reducir costes cloud (medido por € mensuales) renegociando reservas y aplicando políticas de autoscaling."_
+Think of your full experience as a library of achievements. Tailoring means selecting the books that best fit what each employer is looking for.
 
-3. Naturally embed keywords from the **Keyword Bank** in `job_analysis.md`
-4. Use the **exact terminology** the company uses (primary term from the keyword bank)
-5. Include acronym + expansion on first mention: "CI/CD (Continuous Integration / Continuous Delivery)"
+## Tailoring Process
 
-**Golden Rules for Bullets:**
-- Start with strong action verbs: Led, Developed, Implemented, Optimized, Designed, Architected, Mentored, Reduced, Increased, Delivered
-- Include numbers: percentages, team sizes, time savings, user counts
-- Connect to business impact, not just technical tasks
-- Vary the verb — never start two consecutive bullets with the same word
-- Use metric categories: Growth, Efficiency, Quality, Scale, Experience (see `context/ats_rules.md`)
+### Step 1: Analyze the Job (Use Job Description Analyzer First)
+- Identify required skills and keywords
+- Note the company's priorities
+- Understand the role's primary responsibilities
 
-### Step 3: Curate Skills Section
-From the matched skills:
-1. List skills in order of relevance to the job
-2. Use the **exact naming** the job description uses
-3. Group logically (Languages, Frameworks, Tools, Cloud, etc.)
-4. Include adjacent skills with honest framing
+### Step 2: Audit Your Resume
+For each section, ask:
+- Does this support my candidacy for THIS specific role?
+- Is there a better way to phrase this for THIS job?
+- Should this be higher or lower in priority?
 
-### Step 4: Include Education & Awards
-- Education: Include degree, university, location, year, and honors
-- Awards: Include only if relevant to the job or highly prestigious (GitHub Star, MVP, GDE)
+### Step 3: Make Strategic Adjustments
 
-### Step 5: Assemble the CV Draft
+**Professional Summary:** Rewrite to mirror the job's key requirements
 
-```markdown
-# [Candidate Name]
-[Location] · [LinkedIn] · [Phone] · [Email]
+**Skills Section:** Reorder to put most relevant skills first, add missing keywords
 
-## Professional Summary
-[Tailored summary paragraph]
+**Experience:** 
+- Reorder jobs if a less recent role is more relevant
+- Swap bullet points to lead with most relevant achievements
+- Add keywords naturally into existing bullets
 
-## Professional Experience
+**Education:** Highlight relevant coursework, certifications
 
-### [Company Name] | [Location]
-**[Title]** | [Start Date] – [End Date]
-- [Bullet 1 — strongest, most relevant achievement]
-- [Bullet 2]
-- [Bullet 3]
-- [Bullet 4 — if warranted]
+## The Specialization Framework
 
-### [Company Name 2] | [Location]
-**[Title]** | [Start Date] – [End Date]
-- [Bullet 1]
-- [Bullet 2]
+Apply specific structural rules based on the user's chosen specialization (from Step 0 of `/apply`):
 
-## Education
-**[University]** | [Location]
-[Degree] | [Year]
-- [Honors/Distinctions]
+- **Tech (Engineering/PM/Data)**
+  - Prominent "Technical Skills" section right after Summary.
+  - Bullets must emphasize tech stack, system architecture, scalability, or deployment frequency.
+  - Highlight Github/Portfolio links over generic LinkedIn.
+- **Executive (C-Suite/VP/Director)**
+  - Summary must emphasize strategic vision, change management, and bottom-line impact.
+  - Use "Core Competencies" instead of standard skills.
+  - Metrics must be macroscopic (P&L size, team size across regions, M&A volume, ROI).
+- **Academic / R&D**
+  - Section priority: Education → Publications → Teaching/Grants → Professional Experience.
+  - Emphasize funding secured, peer-reviewed articles, and research methodology.
+- **General / Default**
+  - Standard chronological focus on operational efficiency, team collaboration, and direct KPIs.
 
-## Technical Skills
-[Grouped skill list]
+## The Quantification Engine (Resume Quantifier)
 
-## Additional
-- [Content creation, languages, certifications — if relevant]
+**Rule:** A bullet without numbers is just an opinion. If the candidate's Brain lacks precise metrics, the Agent must *interpolate the scale contextually* without lying.
+
+- **Scale Estimation**: If a candidate says "Managed databases", ask or assume based on role context: Was it MBs or TBs of data? How many daily active users? 
+- **Frequency**: "Deployed updates" → "Deployed weekly updates reducing downtime."
+- **Volume**: "Led a team" → "Led a cross-functional team of 6 engineers."
+- **Impact Context**: Never leave an action isolated. e.g. "Automated reports" → "Automated monthly reporting process, saving ~15 hours per week."
+
+> [!WARNING]
+> Keep the line between Truth and Lying perfectly clear. If you estimate a metric, use `~`, `>X`, or `up to X`. Do not invent precise percentages (like 43.2%) out of nowhere.
+
+## Section-by-Section Tailoring Guide
+
+### Professional Summary
+
+This is your "elevator pitch" - customize for each application.
+
+**Generic Summary (AVOID):**
+```
+Results-driven professional with 5 years of experience in business operations. Strong analytical and communication skills. Looking for a challenging opportunity to grow.
 ```
 
-### Step 6: Apply Market-Specific Rules
-Based on `job_analysis.md → Market Context`:
-- **US**: Exclude photo, age, marital status, nationality. Use "resume" language.
-- **UK**: Exclude photo, DOB. Use "CV" language. Include facts and figures.
-- **EU/Spain**: Match language of job posting. Consider Europass format if requested.
-- **LATAM**: Adapt to country conventions (photo norms vary).
-- **File naming**: `FirstName_LastName_TargetRole.pdf`
+**Tailored for Operations Manager Role:**
+```
+Operations Manager with 5 years optimizing supply chain processes and reducing costs by 25%. Expertise in Lean Six Sigma, vendor management, and cross-functional team leadership. Track record of improving operational efficiency while maintaining quality standards.
+```
 
-### Step 7: Save Output
-Save the tailored CV to `output/cv_draft.md`.
+**Tailored for Project Manager Role (Same Person):**
+```
+Project Manager with 5 years leading cross-functional initiatives from concept to delivery. PMP-certified with expertise in Agile methodology, stakeholder management, and budget oversight. Track record of on-time, under-budget project delivery across $10M+ portfolios.
+```
 
-## Output
-A complete, ready-to-validate CV draft saved to `output/cv_draft.md`.
+### Skills Section Reordering
 
-## Anti-Hallucination Rules ⚠️
-- **NEVER invent** experiences, skills, or metrics not present in the candidate's context
-- **NEVER exaggerate** numbers or scope beyond what the source material states
-- **NEVER add keywords from the JD that the candidate doesn't genuinely possess**
-- If a skill gap exists, **omit it** — do not fabricate proficiency
-- Every claim in the CV must be traceable to a file in `context/candidate/`
-- When rephrasing, maintain the **spirit and scale** of the original achievement
-- Prefer "proxy metrics" over no metrics — but NEVER invent the metric itself
+**Job Description Emphasizes:** Data analysis, SQL, Python, stakeholder communication
 
-## Reference
-Always consult `context/ats_rules.md` for the latest formatting rules, bullet formulas, and market-specific conventions.
+**Before (Generic Order):**
+```
+Skills: Microsoft Office, Communication, Project Management, Python, SQL, Data Visualization, Leadership
+```
+
+**After (Tailored Order):**
+```
+Skills: SQL, Python, Data Analysis, Data Visualization, Stakeholder Communication, Project Management, Microsoft Office
+```
+
+### Experience Section
+
+**Strategy 1: Reorder Jobs**
+
+If your most recent job is less relevant than a previous role:
+
+**Before:**
+1. Marketing Coordinator (current, but applying for data role)
+2. Data Analyst (previous, highly relevant)
+
+**After:**
+1. Data Analyst (labeled with dates, moved up)
+2. Marketing Coordinator (still included, but secondary)
+
+**Strategy 2: Swap Bullet Order**
+
+Lead with bullets most relevant to the target role.
+
+**Applying for Management Role - Lead with:**
+- "Led team of 12..."
+- "Managed budget of $2M..."
+
+**Applying for Technical Role - Lead with:**
+- "Developed automated system..."
+- "Analyzed 500K+ data points..."
+
+**Strategy 3: Adjust Bullet Language**
+
+Incorporate job description keywords while staying truthful.
+
+**Job Description Says:** "stakeholder management"
+**Your Bullet Says:** "Worked with various teams"
+**Tailored Version:** "Managed stakeholder relationships across 5 departments, ensuring alignment on project priorities"
+
+## Tailoring Templates
+
+### For Each Job Application, Create:
+
+```markdown
+## RESUME TAILORING PLAN
+
+**Target Position:** [Job Title]
+**Company:** [Company Name]
+**Match Score:** [From JD Analyzer]
+
+### Summary Customization
+**Current:** [Your current summary]
+**Tailored:** [Rewritten for this role]
+
+### Skills Reordering
+**Current Order:** [List]
+**New Order:** [Reordered list with added keywords]
+**Keywords Added:** [New skills from JD]
+
+### Experience Adjustments
+
+**Job 1: [Title]**
+- Bullet to emphasize: [Which bullet to lead with]
+- Keyword to add: [What phrase to incorporate]
+- Bullet to de-emphasize: [Move down or remove if space needed]
+
+**Job 2: [Title]**
+[Same structure]
+
+### Other Adjustments
+- Education: [Any relevant coursework to add]
+- Certifications: [Any to highlight]
+- Projects: [Relevant projects to include]
+```
+
+## Common Tailoring Scenarios
+
+### Scenario 1: Technical Role at Non-Tech Company
+
+**Challenge:** They want technical skills but also business acumen
+
+**Strategy:**
+- Lead with technical achievements
+- Include business impact in every technical bullet
+- Add "translated technical concepts for business stakeholders"
+
+### Scenario 2: Management Role (But You've Done Both IC and Management)
+
+**Challenge:** Show leadership without abandoning technical credibility
+
+**Strategy:**
+- Summary: Emphasize leadership
+- Experience: Lead with team management bullets
+- Keep some technical bullets to show you understand the work
+
+### Scenario 3: Startup (But You've Worked at Big Companies)
+
+**Challenge:** Show you can thrive in ambiguity and wear many hats
+
+**Strategy:**
+- Highlight cross-functional work
+- Emphasize initiative and self-starting
+- Show scrappy, creative problem-solving
+- De-emphasize rigid processes and large team structures
+
+### Scenario 4: Big Company (But You've Worked at Startups)
+
+**Challenge:** Show you can work within structure and at scale
+
+**Strategy:**
+- Emphasize process improvement
+- Highlight work that scaled
+- Show collaboration across teams
+- Add metrics that show impact at scale
+
+## Keyword Integration Rules
+
+### DO:
+- Add keywords that truthfully describe your work
+- Use exact phrasing from job description when accurate
+- Place keywords naturally in context
+- Include keywords in multiple locations (summary, skills, experience)
+
+### DON'T:
+- Add skills you don't actually have
+- Keyword stuff (repeating same term 10x)
+- Create a different meaning than your actual experience
+- Sacrifice readability for keyword density
+
+## Truth vs. Tailoring Line
+
+**Acceptable Tailoring:**
+- Reordering true information
+- Emphasizing relevant experience
+- Using industry-standard terminology
+- Adding context to vague statements
+- Matching language style to job description
+
+**Unacceptable (Lying):**
+- Adding skills you don't have
+- Changing numbers or metrics
+- Creating fake experiences
+- Claiming titles you didn't hold
+- Stating certifications you don't have
+
+## Version Management
+
+### Maintain a Master Resume
+- Keep ONE complete document with ALL experiences
+- Include every bullet you've ever written
+- This is your "source of truth"
+
+### Create Targeted Versions
+- Name files clearly: "JohnSmith_Resume_ProductManager_TechCorp.pdf"
+- Track which version went to which company
+- Save tailoring notes for interview prep
+
+### Version Naming Convention
+```
+[LastName]_Resume_[TargetRole]_[Company]_[Date].pdf
+
+Examples:
+- Smith_Resume_PM_Google_Jan2024.pdf
+- Smith_Resume_DataAnalyst_Meta_Jan2024.pdf
+- Smith_Resume_General_Master.docx (your master file)
+```
+
+## Quick Tailoring Checklist
+
+Before submitting any resume:
+
+1. ✅ Summary mentions the exact job title/function
+2. ✅ Top 5 skills match job description's top 5 requirements
+3. ✅ Most relevant experience is positioned first
+4. ✅ Each job's top bullet addresses job's key requirement
+5. ✅ Keywords from JD appear naturally throughout
+6. ✅ Company/industry terminology is used correctly
+7. ✅ All claims are truthful
+8. ✅ File is named appropriately
+9. ✅ ATS formatting maintained
+10. ✅ Saved for interview prep reference
+
+## Output Format
+
+When tailoring a resume, provide:
+
+```markdown
+# TAILORED RESUME CHANGES
+
+## Target: [Job Title] at [Company]
+
+### Professional Summary
+**Before:** [Original]
+**After:** [Tailored version]
+**Keywords Added:** [List]
+
+### Skills Section
+**New Order:** [Reordered list]
+**Added:** [New keywords]
+**Removed:** [If any, for space]
+
+### Experience Changes
+
+**[Company Name] - [Title]**
+- Move bullet X to position 1
+- Modify bullet Y: [Before → After]
+- Add keyword "[phrase]" to bullet Z
+
+[Repeat for each relevant job]
+
+### Overall Changes Summary
+- Keywords added: X
+- Bullets modified: Y
+- Sections reordered: Yes/No
+- Estimated new match score: Z%
+```
+
+## Implementation Notes
+
+- Always start with the job description analyzer
+- Keep tailoring changes documented for interview prep
+- Maintain master resume as source of truth
+- Never sacrifice ATS compatibility for tailoring
+- Test keyword match after tailoring

@@ -12,13 +12,13 @@ This is the **core workflow** of the Agente CV system. It takes a job descriptio
 
 ## Steps
 
-### Step 0: Identify the Candidate
+### Step 0: Identify Candidate & Specialization
 // turbo
-**This step is mandatory.** Before doing anything else, establish who this CV is for.
+**This step is mandatory.** Before doing anything else, establish who this CV is for and the desired strategic angle.
 
-Check if the user already stated a candidate name in their message. If not, ask:
+Check if the user already stated a candidate name and specialization. If not, ask:
 
-> _"¿Para qué candidato trabajamos? (nombre o carpeta)"_
+> _"¿Para qué candidato trabajamos y qué especialización aplicaremos? (Ej. Tech, Executive, Academic, o General)"_
 
 **Resolution logic:**
 
@@ -44,6 +44,7 @@ Display context header at the start of every response from here on:
 ```
 👤 Candidato: [Name or FICTICIO]
 📁 Brain: [resolved path]
+🏷️ Especialidad: [Tech / Executive / Academic / General]
 📋 Posición: [Job title @ Company — updated as soon as known]
 ```
 
